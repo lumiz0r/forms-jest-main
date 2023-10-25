@@ -1,17 +1,6 @@
 import React from "react";
-import { gql, useQuery } from "@apollo/client";
-
-const USERS_QUERY = gql`
-  query Query {
-    getUsers {
-      country
-      id
-      name
-      surname
-      username
-    }
-  }
-`;
+import { useQuery } from "@apollo/client";
+import { USERS_QUERY } from "../utils/graphql";
 
 const Users = () => {
   const { loading, error, data } = useQuery(USERS_QUERY);

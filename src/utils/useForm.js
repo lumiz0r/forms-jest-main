@@ -11,6 +11,7 @@ export function useForm() {
   const [username, setUsername] = useState("");
   const [id, setId] = useState("");
   const [reset, setReset] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleClean = () => {
     setIsIDValid(false);
@@ -21,6 +22,7 @@ export function useForm() {
     setIsFormValid(false);
     setUsername("");
     setReset(true);
+    setErrorMessage("");
     setTimeout(() => setReset(false), 0);
   };
 
@@ -69,7 +71,9 @@ export function useForm() {
     username,
     id,
     reset,
+    errorMessage,
     setReset,
+    setErrorMessage,
     handleClean,
     handleSurnameChange,
     handleUserNameChange,
