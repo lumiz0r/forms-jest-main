@@ -1,0 +1,101 @@
+Feature: Form
+
+Background:
+    Given The user opens the form
+
+    # TODO:
+    # - Add more scenarios
+    # - Add more examples
+    # - Add more steps
+    # - Generalize tests
+
+    Scenario: Check if field NAME is UPPERCASE
+        When The user enters "JOHN" as name
+        Then The field "name" should be marked as valid
+    
+    Scenario: Check if USERNAME field NOT contains NAME and if UPPERCASE: marked as valid
+        When The user enters "JOHN" as name
+        And The user enters "JULIOJOSE" as username
+        Then The field "username" should be marked as valid
+    
+    Scenario: Check if USERNAME field contains NAME and if UPPERCASE: marked as invalid
+        When The user enters "JOHN" as name
+        And The user enters "JOHN" as username
+        Then The field "username" should be marked as invalid
+
+    Scenario: COUNTRY field shows all options
+        When The user clicks the country dropdown
+        Then The user should see the following country options:
+            | country   |
+            | Select country |
+            | Spain     |
+            | Italy     |
+
+    Scenario Outline: Check if Spain ID provided contains 8 numbers and the correct letter
+        When The user clicks the country dropdown
+        And The user selects "Spain" from the country dropdown
+        And The user enters "<id>" as "idInput"
+        Then The field "idField" should be marked as valid
+        Examples:
+            | id        |
+            | 25366610W |
+            | 12345678Z |
+
+    Scenario Outline: Check if Spain ID provided is marked as invalid 
+        When The user clicks the country dropdown
+        And The user selects "Spain" from the country dropdown
+        And The user enters "<id>" as "idInput"
+        Then The field "idField" should be marked as invalid
+         Examples:
+            | id        |
+            | 12        |
+            | 12345678Y |
+            | 25366610  |
+
+    Scenario Outline: Check if Italy ID provided contains 2 letters then 5 numbers and finally 2 letters
+        When The user clicks the country dropdown
+        And The user selects "Italy" from the country dropdown
+        And The user enters "<id>" as "idInput"
+        Then The field "idField" should be marked as valid
+         Examples:
+            | id        |
+            | CC56485DD |
+            | AA55667ZZ |
+            | DD56454KK |
+
+    Scenario Outline: Check if Italy ID provided is marked as invalid
+        When The user clicks the country dropdown
+        And The user selects "Italy" from the country dropdown
+        And The user enters "<id>" as "idInput"
+        Then The field "idField" should be marked as invalid
+         Examples:
+            | id        |
+            | 1256485DD |
+            | AA55667Z  |
+            | 25366610W |
+
+    Scenario: Check if SUBMIT button is disabled initially
+        Then The user should see the submit button disabled
+
+    Scenario: Check if SUBMIT button is enabled on validating every field
+        When The user enters "JOHN" as name
+        And The user enters "DOE" as surname
+        And The user enters "JULIOJOSE" as username
+        And The user selects "Spain" from the country dropdown
+        And The user enters "25366610W" as id
+        Then The submit button should be enabled
+
+    Scenario: Check if CLEAR button clears all the fields and removes ERROR classes
+        When The user enters "JOHN" as name
+        And The user enters "DOE" as surname
+        And The user enters "JULIOJOSE" as username
+        And The user selects "Spain" from the country dropdown
+        And The user enters "25366610W" as id
+        And The user clicks the clear button
+        Then The user should see the following default content:
+            | field           | content               |
+            | nameInput       |                       |
+            | surnameInput    |                       |
+            | usernameInput   |                       |
+            | option1         | Select country        |
+            | idInput         |                       |

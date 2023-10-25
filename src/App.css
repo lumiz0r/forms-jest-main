@@ -1,0 +1,86 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+div {
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
+
+label {
+  display: flex;
+  font-weight: bold;
+  align-items: flex-start;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Style invalid fields with a red border */
+input.error {
+  border-color: red;
+  border-width: 2px;
+}
+
+/* Style the "OK" message */
+div.OK {
+  margin-top: 20px;
+  text-align: center;
+  color: green;
+  font-weight: bold;
+}
+
+/* Style buttons */
+button {
+  margin-right: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  color: white
+}
+
+button:disabled {
+  background-color: #2d2a2a;
+  cursor: not-allowed;
+}
+
+.dropdown {
+  background-color: #383838;
+  color: white;
+  padding: 10px 40px;
+  width: 200px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-title {
+  font-size: 24px;
+  color: #ffffff;
+  text-align: left;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  text-align: left;
+}
