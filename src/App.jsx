@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import "./App.css";
 import Form from "./components/Form";
-import FormUserInformation from './components/FormUserInformation';
+import FormUserInformation from "./components/FormUserInformation";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
+import Navbar from "./components/Navbar";
+import Users from "./components/Users";
 
 const HELLO_QUERY = gql`
   query Query {
     hello
   }
-
 `;
 
 function App() {
@@ -30,10 +32,25 @@ function App() {
   };
 
   return (
-    <div>
-      {isSubmitted ? <FormUserInformation {...userInfo} /> : <Form onSubmit={handleSubmit} />}
-      {data?.hello}
-    </div>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              {isSubmitted ? (
+                <FormUserInformation {...userInfo} />
+              ) : (
+                <Form onSubmit={handleSubmit} />
+              )}
+              {data?.hello}
+            </div>
+          }
+        />
+        <Route path="/users" element={<Users />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

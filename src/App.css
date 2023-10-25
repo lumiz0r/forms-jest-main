@@ -84,3 +84,55 @@ button:disabled {
   font-size: 12px;
   text-align: left;
 }
+
+.navbar {
+  background-color: #333;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  position: fixed; 
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  z-index: 1000; 
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #ddd;
+}
+
+table {
+  border-collapse: collapse; 
+  width: 100%; 
+  margin-bottom: 20px;
+  border: 1px solid #ccc; 
+}
+
+th {
+  background-color: #333; 
+  color: white; 
+  font-weight: bold; 
+  padding: 8px; 
+  text-align: left; 
+  border: 1px solid #ccc; 
+}
+
+tr {
+  background-color: #474747; 
+}
+
+td {
+  padding: 8px; 
+  text-align: left;
+  border: 1px solid #ccc;
+}
+
+
+tr:hover {
+  background-color: #212121; 
+}
