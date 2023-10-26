@@ -61,6 +61,20 @@ button:disabled {
   cursor: not-allowed;
 }
 
+button.delete-button {
+  background-color: #790808; 
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button.delete-button:hover {
+  background-color: #c8221c; 
+}
+
 .dropdown {
   background-color: #383838;
   color: white;
@@ -130,9 +144,4 @@ td {
   padding: 8px; 
   text-align: left;
   border: 1px solid #ccc;
-}
-
-
-tr:hover {
-  background-color: #212121; 
 }

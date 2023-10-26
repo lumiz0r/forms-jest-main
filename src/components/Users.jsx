@@ -1,9 +1,12 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
-import { USERS_QUERY } from "../utils/graphql";
+import { useQuery, useMutation } from "@apollo/client";
+import { USERS_QUERY, DELETE_USER_MUTATION } from "../utils/graphql";
 
 const Users = () => {
   const { loading, error, data } = useQuery(USERS_QUERY);
+  const [deleteMutation] = useMutation(DELETE_USER_MUTATION, {
+    refetchQueries: [{ query: USERS_QUERY }],
+  });
 
   if (loading) return <p>Loading...</p>;
 
@@ -11,6 +14,14 @@ const Users = () => {
     console.log(error);
     return <p>Error</p>;
   }
+
+  const deleteUser = (userId) => {
+    deleteMutation({
+      variables: {
+        id: userId,
+      },
+    });
+  };
 
   return (
     <table>
@@ -41,6 +52,9 @@ const Users = () => {
             <td>{user.surname}</td>
             <td>{user.country}</td>
             <td>{user.id}</td>
+            <td>
+              <button className="delete-button" onClick={() => deleteUser(user.id)}>Delete</button>
+            </td>
           </tr>
         ))}
       </tbody>

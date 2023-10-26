@@ -35,3 +35,11 @@ export const USERS_QUERY = gql`
     }
   }
 `;
+
+export const DELETE_USER_MUTATION = gql`
+  mutation Mutation($id: String) {
+    deleteUser(id: $id) {
+      id
+    }
+  }
+`;
