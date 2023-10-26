@@ -1,6 +1,7 @@
 import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { USERS_QUERY, DELETE_USER_MUTATION } from "../utils/graphql";
+import User from "./User"; 
 
 const Users = () => {
   const { loading, error, data } = useQuery(USERS_QUERY);
@@ -8,12 +9,6 @@ const Users = () => {
     refetchQueries: [{ query: USERS_QUERY }],
   });
 
-  if (loading) return <p>Loading...</p>;
-
-  if (error) {
-    console.log(error);
-    return <p>Error</p>;
-  }
 
   const deleteUser = (userId) => {
     deleteMutation({
@@ -22,6 +17,14 @@ const Users = () => {
       },
     });
   };
+
+
+  if (loading) return <p>Loading...</p>;
+
+  if (error) {
+    console.log(error);
+    return <p>Error</p>;
+  }
 
   return (
     <table>
@@ -35,27 +38,8 @@ const Users = () => {
         </tr>
       </thead>
       <tbody>
-        {loading && (
-          <tr>
-            <td>Loading...</td>
-          </tr>
-        )}
-        {error && (
-          <tr>
-            <td>Error...</td>
-          </tr>
-        )}
         {data?.getUsers.map((user) => (
-          <tr key={user.id}>
-            <td>{user.username}</td>
-            <td>{user.name}</td>
-            <td>{user.surname}</td>
-            <td>{user.country}</td>
-            <td>{user.id}</td>
-            <td>
-              <button className="delete-button" onClick={() => deleteUser(user.id)}>Delete</button>
-            </td>
-          </tr>
+          <User key={user.id} user={user} deleteUser={deleteUser} />
         ))}
       </tbody>
     </table>

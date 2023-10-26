@@ -43,3 +43,27 @@ export const DELETE_USER_MUTATION = gql`
     }
   }
 `;
+
+export const EDIT_USER_MUTATION = gql`
+  mutation Mutation(
+    $username: String
+    $name: String
+    $surname: String
+    $country: String
+    $id: String
+  ) {
+    editUser(
+      username: $username
+      name: $name
+      surname: $surname
+      country: $country
+      id: $id
+    ) {
+      country
+      id
+      name
+      surname
+      username
+    }
+  }
+`;
