@@ -67,3 +67,15 @@ export const EDIT_USER_MUTATION = gql`
     }
   }
 `;
+
+export const LOGIN_USER = gql`
+  query Query($loginUserId: String) {
+    loginUser(id: $loginUserId) {
+      username
+      name
+      surname
+      country
+      id
+    }
+  }
+`;
