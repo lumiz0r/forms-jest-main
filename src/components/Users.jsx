@@ -1,30 +1,25 @@
-import React from "react";
-import { useQuery, useMutation } from "@apollo/client";
-import { USERS_QUERY, DELETE_USER_MUTATION } from "../utils/graphql";
-import User from "./User"; 
+import React, { useState, useEffect } from "react";
+import api from "../api/axiosConfig";
+import User from "./User";
 
 const Users = () => {
-  const { loading, error, data } = useQuery(USERS_QUERY);
-  const [deleteMutation] = useMutation(DELETE_USER_MUTATION, {
-    refetchQueries: [{ query: USERS_QUERY }],
-  });
+  const [users, setUsers] = useState([]);
 
+  const getUsers = async () => {
+    try {
+      const response = await api.get("/api/users");
 
-  const deleteUser = (userId) => {
-    deleteMutation({
-      variables: {
-        id: userId,
-      },
-    });
+      console.log(response.data);
+
+      setUsers(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-
-  if (loading) return <p>Loading...</p>;
-
-  if (error) {
-    console.log(error);
-    return <p>Error</p>;
-  }
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <table>
@@ -38,9 +33,7 @@ const Users = () => {
         </tr>
       </thead>
       <tbody>
-        {data?.getUsers.map((user) => (
-          <User key={user.id} user={user} deleteUser={deleteUser} />
-        ))}
+        <User />
       </tbody>
     </table>
   );

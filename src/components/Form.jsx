@@ -8,8 +8,6 @@ import NameInput from "./NameInput";
 import SubmitButton from "./SubmitButton";
 import SurnameInput from "./SurnameInput";
 import UserNameInput from "./UserNameInput";
-import { useMutation } from "@apollo/client";
-import { USERS_QUERY, CREATE_USER_MUTATION } from "../utils/graphql";
 
 // eslint-disable-next-line react/prop-types
 const Form = ({ onSubmit }) => {
@@ -32,28 +30,7 @@ const Form = ({ onSubmit }) => {
     handleIdChange,
   } = useForm();
 
-  const handleSubmit = async () => {
-    try {
-      await createMutation({
-        variables: {
-          username: username,
-          name: name,
-          surname: surname,
-          country: country,
-          id: id,
-        },
-      });
-      onSubmit();
-    } catch (error) {
-      console.log(error);
-      setErrorMessage(error.message);
-    }
 
-  };
-
-  const [createMutation] = useMutation(CREATE_USER_MUTATION, {
-    refetchQueries: [{ query: USERS_QUERY }],
-  });
 
   return (
     <div>
@@ -79,8 +56,6 @@ const Form = ({ onSubmit }) => {
         />
         <SubmitButton
           isFormValid={isFormValid}
-          onSubmit={handleSubmit}
-          onError={handleSubmit}
         />
         <ClearButton onClear={handleClean} setReset={setReset} />
         {errorMessage && <div className="error-message">{errorMessage}</div>}
