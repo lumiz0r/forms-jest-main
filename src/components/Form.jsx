@@ -8,6 +8,7 @@ import NameInput from "./NameInput";
 import SubmitButton from "./SubmitButton";
 import SurnameInput from "./SurnameInput";
 import UserNameInput from "./UserNameInput";
+import axios from "axios";
 
 // eslint-disable-next-line react/prop-types
 const Form = ({ onSubmit }) => {
@@ -30,7 +31,23 @@ const Form = ({ onSubmit }) => {
     handleIdChange,
   } = useForm();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
+    axios.post("http://localhost:3001/api/users", 
+      name,
+      surname,
+      country,
+      username,
+      id,
+    )
+    .then((response) => {
+      console.log("User Created: ", response);
+      onSubmit();
+    }, (error) => {
+      console.log("Error: ", error);
+    })
+  }
 
   return (
     <div>
