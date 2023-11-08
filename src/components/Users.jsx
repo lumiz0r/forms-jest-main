@@ -33,7 +33,16 @@ const Users = () => {
         </tr>
       </thead>
       <tbody>
-        <User />
+        {users.map((user) => (
+          <User
+            key={user.id}
+            username={user.username}
+            name={user.name}
+            surname={user.surname}
+            country={user.country}
+            id={user.id}
+          />
+        ))}
       </tbody>
     </table>
   );
