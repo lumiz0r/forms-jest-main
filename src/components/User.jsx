@@ -88,7 +88,7 @@ const User = ({ id, username, name, surname, country, onDelete }) => {
         ) : (
           <>
             <button onClick={handleEditClick}>Edit</button>
-            <button onClick={handleDeleteClick}>Delete</button>
+            <button className='delete-button' onClick={handleDeleteClick}>Delete</button>
           </>
         )}
       </td>
