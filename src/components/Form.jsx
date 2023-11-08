@@ -31,23 +31,25 @@ const Form = ({ onSubmit }) => {
     handleIdChange,
   } = useForm();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    axios.post("http://localhost:3001/api/create", 
-      name,
-      surname,
-      country,
-      username,
-      id,
-    )
-    .then((response) => {
-      console.log("User Created: ", response);
-      onSubmit();
-    }, (error) => {
-      console.log("Error: ", error);
-    })
+  const handleSubmit = () => {
+    const userData = {
+      name: name,
+      surname: surname,
+      country: country,
+      username: username,
+      id: id,
+    };
+  
+    axios.post('http://localhost:8080/api/users', userData)
+      .then((response) => {
+        console.log("User Created: ", response);
+        onSubmit();
+      })
+      .catch((error) => {
+        console.log("Error: ", error);
+      });
   }
+  
 
   return (
     <div>
@@ -73,6 +75,7 @@ const Form = ({ onSubmit }) => {
         />
         <SubmitButton
           isFormValid={isFormValid}
+          onSubmit={handleSubmit}
         />
         <ClearButton onClear={handleClean} setReset={setReset} />
         {errorMessage && <div className="error-message">{errorMessage}</div>}
