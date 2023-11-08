@@ -34,7 +34,7 @@ const Form = ({ onSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    axios.post("http://localhost:3001/api/users", 
+    axios.post("http://localhost:3001/api/create", 
       name,
       surname,
       country,
