@@ -2,8 +2,9 @@
 import React from 'react';
 
 import { useState } from 'react';
+import api from '../api/axiosConfig';
 
-const User = ({ id, username, name, surname, country, onDelete }) => {
+const User = ({ _id, id, username, name, surname, country, getUsers }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editedUsername, setEditedUsername] = useState(username);
   const [editedName, setEditedName] = useState(name);
@@ -15,12 +16,10 @@ const User = ({ id, username, name, surname, country, onDelete }) => {
   };
 
   const handleSaveClick = () => {
-    // Save the edited data here
     setIsEditing(false);
   };
 
   const handleCancelClick = () => {
-    // Reset the edited data here
     setIsEditing(false);
     setEditedUsername(username);
     setEditedName(name);
@@ -28,8 +27,14 @@ const User = ({ id, username, name, surname, country, onDelete }) => {
     setEditedCountry(country);
   };
 
-  const handleDeleteClick = () => {
-    onDelete(id);
+  const handleDeleteClick = async () => {
+    try {
+      const response = await api.delete(`/api/users/delete/${_id}`);
+      console.log(response);
+      getUsers();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

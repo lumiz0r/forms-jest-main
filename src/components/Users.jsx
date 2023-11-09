@@ -41,6 +41,8 @@ const Users = () => {
             surname={user.surname}
             country={user.country}
             id={user.id}
+            _id = {user._id}
+            getUsers={getUsers}
           />
         ))}
       </tbody>
